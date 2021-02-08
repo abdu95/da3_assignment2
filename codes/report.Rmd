@@ -1,0 +1,61 @@
+---
+title: "report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Goal is to predict the probability of fast sales growth based on the features we have.
+
+First, we use logit models of increasing complexity. Because of its automated feature selection characteristic, LASSO model will also be used. Logit model is not a linear model because we are constraining predicted value to be 0 or 1. Similarly to LASSO, we can put a penalty on how large the coefficients of the logit model should be.
+
+coefficients maybe linear model.
+
+raw variables
+
+ 
+
+
+
+management related variables - hr.
+
+
+
+interactions will be discovered by the RF itself. 
+
+OLS X1: sales_mil_log (coefficient is negative) —> *if sales is larger, then firm is less likely to exit* (default column being equal to 1)
+
+d1 —> first difference of sales, sales on increase or not
+
+train and holdout dataset
+
+training set: 15K observations, 20% default [go out of operation, exit] (the same is true in holdout set as well)
+
+CV - to select best performing predictive model
+
+**classProbs** = TRUE & savedPredictions = TRUE —> tells to CARET that this is binary prediction problem
+
+same seed —> to have exactly the same folds in CV
+
+outcome variable - factor **default** 
+
+family = binomial —> estimate logit models for 2 values (0 & 1)
+
+5 models of increasing complexity. for each fold we want to see RMSE
+
+difference in model RMSE is not large. 
+
+now, I am predicting **probability** 
+
+target is 1 and 0. you are estimating the probability of 1. 
+
+LOGIT lasso. same seed so that we can compare to results of logit. we are trying to select best model out of the LASSO model
+
+
+```{r pressure, echo=FALSE}
+
+```

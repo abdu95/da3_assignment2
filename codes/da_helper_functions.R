@@ -377,7 +377,7 @@ createLossPlot <- function(r, best_coords, file_name,  myheight_small = 5.625, m
     annotate(geom = "text", x = t, y= l,
              label= round(l, 2), hjust = -0.3, size = 7) +
     theme_bg()
-  save_fig(file_name, output, "small")
+  save_fig(file_name, data_out, "small")
 
   #  ggsave(plot = loss_plot, paste0(file_name,".png"), width=mywidth_small, height=myheight_small, dpi=1200)
   #  cairo_ps(filename = paste0(file_name,".eps"), width = mywidth_small, height = myheight_small, pointsize = 12, fallback_resolution = 1200)
@@ -433,7 +433,7 @@ createRocPlot <- function(r, file_name,  myheight_small = 5.625, mywidth_small =
     theme_bg()
   #+    theme(axis.text.x = element_text(size=13), axis.text.y = element_text(size=13),
   #        axis.title.x = element_text(size=13), axis.title.y = element_text(size=13))
-  save_fig(file_name, output, "small")
+  save_fig(file_name, data_out, "small")
 
   #ggsave(plot = roc_plot, paste0(file_name, ".png"),      width=mywidth_small, height=myheight_small, dpi=1200)
   #cairo_ps(filename = paste0(file_name, ".eps"),    #        width = mywidth_small, height = myheight_small, pointsize = 12,    #       fallback_resolution = 1200)
@@ -532,6 +532,6 @@ create_calibration_plot <- function(data, file_name, prob_var, actual_var, y_lab
       scale_y_continuous(expand=c(0.01,0.01),breaks=c(seq(0,1,0.1))) +
       scale_x_continuous(expand=c(0.01,0.01),breaks=c(seq(0,1,0.1))) 
 
-    save_fig(file_name, output, "small")
+    save_fig(file_name, data_out, "small")
     p
 }
