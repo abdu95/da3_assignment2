@@ -111,10 +111,17 @@ data$balsheet_notfullyear <- NULL
 ols_modelx1 <- lm(formula(paste0("comp_growth ~", paste0(X1, collapse = " + "))),
                   data = data)
 summary(ols_modelx1)
-
+table(data$comp_growth)
 glm_modelx1 <- glm(formula(paste0("comp_growth ~", paste0(X1, collapse = " + "))),
                    data = data, family = "binomial")
 summary(glm_modelx1)
+
+demo_vars <- c("sales_mil_log", "profit_loss_year_pl")
+glm_model_demo <- glm(formula(paste0("comp_growth ~", paste0(demo_vars, collapse = " + "))),
+                      data = data, family = "binomial")
+
+glm_model_demo
+
 
 # Check model X2
 glm_modelx2 <- glm(formula(paste0("comp_growth ~", paste0(X2, collapse = " + "))),

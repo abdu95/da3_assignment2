@@ -309,6 +309,7 @@ data <- data %>%
 write_csv(data,paste0(data_out,"bisnode_firms_clean.csv"))
 write_rds(data,paste0(data_out,"bisnode_firms_clean.rds"))
 
+# demo <- data$inc_bef_tax / data$share_eq_bs_quad
 
 na_count <- sapply(data, function(y) sum(length(which(is.na(y)))))
 na_count <- data.frame(na_count)

@@ -9,23 +9,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-Goal is to predict the probability of fast sales growth based on the features we have.
+Our goal is to predict the probability of fast sales growth of the firm based on the features we have.
 
-First, we use logit models of increasing complexity. Because of its automated feature selection characteristic, LASSO model will also be used. Logit model is not a linear model because we are constraining predicted value to be 0 or 1. Similarly to LASSO, we can put a penalty on how large the coefficients of the logit model should be.
+First, we use logit models of increasing complexity. Because of its automated feature selection characteristic, LASSO model will also be used. Logit model is not a linear model because we are constraining predicted value to be 0 or 1. Similarly to LASSO, we can put a penalty on how large the coefficients of the logit model can be.
 
-coefficients maybe linear model.
+There are many features in our dataset. To build a model, we defined sets of features (X1, X2, X3, X4, X5) with increasing complexity where each next set consists of more features and interactions than previous set. Features include quality variables, variables that are related to the income and expenditure of the firm and other financial variables. 
 
-raw variables
+"rawvars" is the set of raw variables that includes company's income, expenditure and other financial features. "hr" and "firm" variables are management related variables about age and gender of CEO, age and region of firm. We defined these features to use with Random Forest model. In these features we haven't defined interactions as they will be discovered by the Random Forest itself. 
 
- 
+To see the pattern of association in the data, we estimated the linear model where the outcome variable is 0 or 1 ("slow" or "fast" sales growth of a firm). We check the coefficients of the linear model. 
+
+sales_mil_log and sales_mil_log_sq variables have negative coefficient. This is probably because it is difficult to reach "fast sales growth" for the firms that usually have large sales. 
+
+WE also saw the coefficients of Generalized Linear Model as we are predicting a binary outcome from a set of continuous predictor variables. 
+
+```{r}
+ols_model <- lm(formula(paste0("comp_growth ~", paste0(X4, collapse = " + "))),
+                data = data)
+```
+
+```{r}
+# Check simplest model X1
+ols_modelx1 <- lm(formula(paste0("comp_growth ~", paste0(X1, collapse = " + "))),
+                  data = data)
+# summary(ols_modelx1)
+```
+
+## Estminating predictive models
+
+What types of erros there are that we can make
+
+We separate the data into training and holdout set. We also do some basic tabulation to see what our data represents
 
 
-
-management related variables - hr.
-
-
-
-interactions will be discovered by the RF itself. 
 
 OLS X1: sales_mil_log (coefficient is negative) —> *if sales is larger, then firm is less likely to exit* (default column being equal to 1)
 
